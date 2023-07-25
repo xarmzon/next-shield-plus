@@ -29,8 +29,8 @@
       "pre-commit": "tsdx lint"
     }
   },
-  "name": "next-shield",
-  "description": "The shield that every Next.js project needs.",
+  "name": "@rastaxarm/next-shield",
+  "description": "The shield that every Next.js project needs with the addition of callback url added to the login endpoint",
   "author": "Jorge Acero",
   "module": "dist/next-shield.esm.js",
   "keywords": [
