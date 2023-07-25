@@ -43,7 +43,7 @@ export function NextShield<
 >({
   isAuth,
   isLoading,
-  router: { pathname, replace },
+  router: { pathname, replace, query },
   loginRoute,
   accessRoute,
   privateRoutes,
@@ -62,8 +62,15 @@ export function NextShield<
   const access = getAccessRoute(RBAC, userRole, accessRoute)
 
   useEffect(() => {
-    if (!isAuth && !isLoading && pathIsPrivate) replace(loginRoute)
-    if (isAuth && !isLoading && pathIsPublic) replace(access)
+    if (!isAuth && !isLoading && pathIsPrivate)
+      replace(loginRoute + '?callback=' + pathname)
+    if (isAuth && !isLoading && pathIsPublic) {
+      if (query?.callback) {
+        replace(query?.callback)
+      } else {
+        replace(access)
+      }
+    }
     if (isAuth && userRole && !isLoading && !pathIsHybrid && !pathIsAuthorized)
       replace(access)
   }, [
